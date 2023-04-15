@@ -4,10 +4,6 @@
 
 class paddle{
     
-    Rectangle upperHitBox;
-    Rectangle middleHitBox;
-    Rectangle LowerHitbox;
-    
     public:
         Vector2 position;
         int playerNum;
@@ -15,13 +11,19 @@ class paddle{
             playerNum = player;
         }
 
-        void collisions(Vector2 ballPosistion){
+        void collisions(Vector2 ballPosistion, bool isFalse){
+            if (ballPosistion.x <= position.x +10)
+            {
+                
+            }
             
         }
             
     ;
 
-
+    Rectangle upperHitBox = {};
+    Rectangle middleHitBox;
+    Rectangle LowerHitbox;
     
 
     void startingPos(){
