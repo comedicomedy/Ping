@@ -7,23 +7,14 @@ class paddle{
     public:
         Vector2 position;
         int playerNum;
+        Rectangle middleHitBox = {position.x,position.y,10,75};
         paddle(int player){
             playerNum = player;
-        }
-
-        void collisions(Vector2 ballPosistion, bool isFalse){
-            if (ballPosistion.x <= position.x +10)
-            {
-                
-            }
-            
-        }
-            
+        }    
     ;
 
-    Rectangle upperHitBox = {};
-    Rectangle middleHitBox;
-    Rectangle LowerHitbox;
+    //Rectangle upperHitBox = {position.x,position.y,10, 75/3};
+    //Rectangle LowerHitbox = {position.x, position.y+50, 10, 75/3};
     
 
     void startingPos(){
@@ -60,6 +51,26 @@ class paddle{
 };
 
 
+class ball{
+    public:
+        Vector2 pos;
+        Rectangle hitbox = {pos.x, pos.y,10,10};
+    ;
+    Vector2 velocity;
+    
+    void addVelocityX(float velocityNum){
+        velocity.x = velocityNum;
+
+        pos.x += velocity.x;
+    }
+
+    void addVelocityY(float velocitynum){
+        velocity.y = velocitynum;
+
+        pos.y += velocity.y;
+    }
+};
+
 //------------------------------------------------------------------------------------
 // Program main entry point
 //------------------------------------------------------------------------------------
@@ -67,12 +78,12 @@ int main(void)
 {    
     const int screenWidth = 320;
     const int screenHeight = 240;
-    Vector2 ballPos = {320/2,240/2};
     bool firstHit = false;
     paddle player1(1);
     paddle player2(2);
-    
-    
+    bool happyhappyhappy = false;
+    ball ball;
+
     // Initialization
     //--------------------------------------------------------------------------------------
     InitWindow(screenWidth, screenHeight, "Ping");
@@ -80,6 +91,7 @@ int main(void)
     SetTargetFPS(60);    // Set our game to run at 60 frames-per-second
     player1.startingPos();
     player2.startingPos();
+    ball.pos = {320/2,240/2};
     //--------------------------------------------------------------------------------------
     
     while (!WindowShouldClose())
@@ -92,7 +104,11 @@ int main(void)
 
         if (!firstHit)
         {
-            ballPos.x -= 3;   
+            ball.pos.x -= 3;   
+        }
+        if (CheckCollisionRecs(ball.hitbox,player1.middleHitBox))
+        {
+            happyhappyhappy = true;
         }
           
         // Draw
@@ -104,7 +120,9 @@ int main(void)
           DrawRectangle(player1.position.x,player1.position.y,10,75,RAYWHITE);
           DrawRectangle(player2.position.x, player2.position.y,10,75,RAYWHITE);
 
-          DrawCircle(ballPos.x,ballPos.y,10,RAYWHITE);
+          DrawCircle(ball.pos.x, ball.pos.y,10,RAYWHITE);
+
+          if(happyhappyhappy) DrawText("Good",0,0,40,RAYWHITE);
         EndDrawing();
         //----------------------------------------------------------------------------------
     }
