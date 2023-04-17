@@ -82,7 +82,7 @@ int main(void)
     paddle player1(1);
     paddle player2(2);
     bool happyhappyhappy = false;
-    ball ball;
+    ball ball; 
 
     // Initialization
     //--------------------------------------------------------------------------------------
@@ -91,6 +91,7 @@ int main(void)
     SetTargetFPS(60);    // Set our game to run at 60 frames-per-second
     player1.startingPos();
     player2.startingPos();
+    ball.pos = {screenWidth/2 , screenHeight/2};
     
     //--------------------------------------------------------------------------------------
     
@@ -108,8 +109,15 @@ int main(void)
         }
         if (CheckCollisionRecs(ball.hitbox,player1.middleHitBox))
         {
-            happyhappyhappy = true;
+            firstHit = true;
+
+            ball.pos.x += 3;
         }
+        if (CheckCollisionRecs(ball.hitbox, player2.middleHitBox))
+        {
+            //ball.pos.x -= 3;
+        }
+        
           
         // Draw
         //---------------------------------------------------------------------------------
