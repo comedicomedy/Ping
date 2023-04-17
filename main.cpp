@@ -91,7 +91,7 @@ int main(void)
     SetTargetFPS(60);    // Set our game to run at 60 frames-per-second
     player1.startingPos();
     player2.startingPos();
-    ball.pos = {320/2,240/2};
+    
     //--------------------------------------------------------------------------------------
     
     while (!WindowShouldClose())
